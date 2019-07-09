@@ -182,7 +182,7 @@ data = dict(
     workers_per_gpu=4,
     train=dict(
         type='RepeatDataset',  # to avoid reloading datasets frequently
-        times=30,
+        times=2,
         dataset=dict(
             type='FaultDetection',
             ann_file=[data_root + 'nohr_voc/ImageSets/Main/trainval.txt'],
@@ -205,7 +205,7 @@ lr_config = dict(
     warmup_iters=500,
     warmup_ratio=1.0 / 3,
     step=[8, 11])
-checkpoint_config = dict(interval=10)
+checkpoint_config = dict(interval=5)
 # yapf:disable
 log_config = dict(
     interval=50,
@@ -215,7 +215,7 @@ log_config = dict(
     ])
 # yapf:enable
 # runtime settings
-total_epochs = 5
+total_epochs = 100
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
 work_dir = './work_dirs/cascade_rcnn_r101_fpn_1x'
